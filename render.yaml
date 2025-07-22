@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: django-backend
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: |
+      python manage.py migrate && gunicorn clockin_project.wsgi:application
+    envVars:
+      - key: DJANGO_SETTINGS_MODULE
+        value: clockin_project.settings
+      # Add your other environment variables here, e.g. SECRET_KEY, DEBUG, etc.
